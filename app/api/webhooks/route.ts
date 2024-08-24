@@ -66,7 +66,7 @@ export const POST = async (req: NextRequest) => {
         customer.orders.push(newOrder._id)
       } else {
         customer = new Customer({
-          ...customerInfo,
+          ...customerInfo, 
           orders: [newOrder._id],
         })
       }
@@ -74,7 +74,7 @@ export const POST = async (req: NextRequest) => {
       await customer.save()
     }
 
-    return new NextResponse("Order created", { status: 200 })
+    return new NextResponse("Order  created", { status: 200 })
   } catch (err) {
     console.log("[webhooks_POST]", err)
     return new NextResponse("Failed to create the order", { status: 500 })
