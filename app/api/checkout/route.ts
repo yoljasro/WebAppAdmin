@@ -26,8 +26,8 @@ export async function POST(req: NextRequest) {
         allowed_countries: ["US", "CA"],
       },
       shipping_options: [
-        { shipping_rate: "shr_1MfufhDgraNiyvtnDGef2uwK" },
-        { shipping_rate: "shr_1OpHFHDgraNiyvtnOY4vDjuY" },
+        { shipping_rate: "shr_1PrfWLKVH5YZ6sNNG5FgnJSB" },
+        { shipping_rate: "shr_1PrfbIKVH5YZ6sNNIDiW5jrk" },
       ],
       line_items: cartItems.map((cartItem: any) => ({
         price_data: {
