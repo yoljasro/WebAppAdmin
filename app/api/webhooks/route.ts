@@ -4,6 +4,12 @@ import { connectToDB } from "@/lib/mongoDB";
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
 export const POST = async (req: NextRequest) => {
   try {
     const rawBody = await req.text();
@@ -74,9 +80,9 @@ export const POST = async (req: NextRequest) => {
       await customer.save();
     }
 
-    return new NextResponse("Order created", { status: 200 });
+    return new NextResponse("Order created", { status: 200, headers: corsHeaders });
   } catch (err) {
     console.log("[webhooks_POST]", err);
-    return new NextResponse("Failed to create the order", { status: 500 });
+    return new NextResponse("Failed to create the order", { status: 500, headers: corsHeaders });
   }
 };
