@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "https://store-front-rosy.vercel.app",
+  "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
   "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
@@ -26,12 +26,12 @@ export async function POST(req: NextRequest) {
         allowed_countries: ["US", "CA"],
       },
       shipping_options: [
-        { shipping_rate: "shr_1PrfWLKVH5YZ6sNNG5FgnJSB" },
-        { shipping_rate: "shr_1PrfbIKVH5YZ6sNNIDiW5jrk" },
+        { shipping_rate: "shr_1PrfWLKVH5YZ6sNNG5FgnJSB" }, // USD valyutasidagi shipping rate
+        { shipping_rate: "shr_1PrfbIKVH5YZ6sNNIDiW5jrk" }, // USD valyutasidagi shipping rate
       ],
       line_items: cartItems.map((cartItem: any) => ({
         price_data: {
-          currency: "cad",
+          currency: "usd", // Valyutani USD ga o'zgartiring
           product_data: {
             name: cartItem.item.title,
             metadata: {
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
               ...(cartItem.color && { color: cartItem.color }),
             },
           },
-          unit_amount: cartItem.item.price * 100,
+          unit_amount: cartItem.item.price * 100, // Narxni USD bo'yicha belgilang
         },
         quantity: cartItem.quantity,
       })),
